@@ -5,8 +5,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WDEL implements WebDriverEventListener {
+public class WDEL implements CustomEventListener {
 
 	public void beforeAlertAccept(WebDriver driver) {
 		System.out.println("Before Alert Accepted");
@@ -29,12 +31,12 @@ public class WDEL implements WebDriverEventListener {
 	}
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
-		System.out.println("Before Navigation to : " + url);
+		System.out.println("Before Navigation to : " + driver.getCurrentUrl());
 
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
-		System.out.println("After Navigation to : " + url);
+		System.out.println("After Navigation to : " + driver.getCurrentUrl());
 
 	}
 
@@ -69,32 +71,36 @@ public class WDEL implements WebDriverEventListener {
 	}
 
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-		System.out.println("Before FindBy");
+		System.out.println("Before FindBy" );
 
 	}
 
 	public void afterFindBy(By by, WebElement element, WebDriver driver) {
-		System.out.println("After FindBy");
+		System.out.println("After FindBy"+element.toString());
 
 	}
 
 	public void beforeClickOn(WebElement element, WebDriver driver) {
-		System.out.println("Before ClickOn");
+		WebDriverWait wait=new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		
+		System.out.println("Before ClickOn"+element.toString());
 
 	}
 
 	public void afterClickOn(WebElement element, WebDriver driver) {
-		System.out.println("After ClickOn");
+		
+		System.out.println("After ClickOn"+element.toString());
 
 	}
 
 	public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-		System.out.println("Before ChangeValueOf");
+		System.out.println("Before ChangeValueOf"+element.toString());
 
 	}
 
 	public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-		System.out.println("After ChangeValueOf");
+		System.out.println("After ChangeValueOf"+element.toString());
 
 	}
 
@@ -141,6 +147,16 @@ public class WDEL implements WebDriverEventListener {
 	public void afterGetText(WebElement element, WebDriver driver, String text) {
 		System.out.println("After GetText");
 
+	}
+
+	public void beforeSelectDropdown(WebElement element, WebDriver driver) {
+		System.out.println("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+		
+	}
+
+	public void afterSelectDropdown(WebElement element, WebDriver driver) {
+		System.out.println("BYEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		
 	}
 
 }
